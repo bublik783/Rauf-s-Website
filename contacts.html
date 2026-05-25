@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+    <input type="radio" id="theme-light" name="site-theme" class="theme-radio theme-light-radio" checked aria-hidden="true">
+    <input type="radio" id="theme-dark" name="site-theme" class="theme-radio theme-dark-radio" aria-hidden="true">
+    <input type="radio" id="theme-cat" name="site-theme" class="theme-radio theme-cat-radio" aria-hidden="true">
+    <div class="page">
+    <header id="top">
+        <div class="container header-grid">
+            <h1 class="logo"><a href="index.html">Rauf's&nbsp;Website</a></h1>
+            <div class="header-actions">
+                <div class="theme-switcher" aria-label="Выбор темы">
+                    <label for="theme-light" class="theme-button" title="Светлая тема">☀️</label>
+                    <label for="theme-dark" class="theme-button" title="Тёмная тема">🌙</label>
+                    <label for="theme-cat" class="theme-button" title="Кошачья тема">🐾</label>
+                </div>
+                <label for="menu-toggle" class="burger" aria-label="Открыть меню" title="Меню"><span></span><span></span><span></span><span class="burger-text">Меню</span></label>
+            </div>
+            <nav class="main-nav" aria-label="Главное меню">
+                <a href="index.html">Главная</a>
+                <a href="about.html">Обо мне</a>
+                <a href="skills.html">Навыки</a>
+                <a href="interactive.html">JavaScript</a>
+                <a href="contacts.html" class="active">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container content-page">
+        <section>
+            <h2>Контакты</h2>
+            <p>Связаться со мной можно через электронную почту, социальные сети или с помощью формы обратной связи. Форма создана только для верстки и не отправляет данные.</p>
+            <div class="social-links social-icons" aria-label="Социальные сети">
+                <h3>Социальные сети</h3>
+                <a href="https://vk.com/polloter6" target="_blank" rel="noopener" title="ВКонтакте" aria-label="ВКонтакте">
+                    <img src="images/vk.png" alt="ВКонтакте">
+                </a>
+                <a href="https://t.me/stormmml" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram">
+                    <img src="images/telegram.png" alt="Telegram">
+                </a>
+                <a href="https://github.com/bublik783" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                    <img src="images/github.png" alt="GitHub">
+                </a>
+                <a href="mailto:raufmirzabalaev6788@gmail.com" title="Почта" aria-label="Почта">
+                    <img src="images/mail.png" alt="Почта">
+                </a>
+            </div>
+        </section>
+
+        <section class="contact-layout">
+            <form action="#" method="post" class="contact-form" data-contact-form enctype="multipart/form-data">
+                <h3>Форма обратной связи</h3>
+                <label for="fullname">ФИО</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Иванов Иван Иванович" required>
+
+                <label for="email">Ваш email</label>
+                <input type="email" id="email" name="email" placeholder="Введите email" required>
+
+                <label for="phone">Номер телефона</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+
+                <label for="contact-date">Желаемая дата связи</label>
+                <input type="date" id="contact-date" name="contact-date" required>
+                <span class="helper-text" data-date-error>Выберите дату не раньше сегодняшней.</span>
+
+                <label for="photo">Загрузка фотографии</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <img class="photo-preview" data-photo-preview src="" alt="" hidden>
+
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" rows="5" placeholder="Введите сообщение" required></textarea>
+
+                <button type="submit">Отправить</button>
+                <div class="form-result" data-form-result>После отправки здесь появится результат разбора ФИО.</div>
+            </form>
+
+            <div>
+                <h3>Режим работы</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>День недели</th>
+                            <th>Часы работы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Понедельник</td><td>10:00 - 20:00</td></tr>
+                        <tr><td>Вторник</td><td>10:00 - 20:00</td></tr>
+                        <tr><td>Среда</td><td>12:00 - 20:00</td></tr>
+                        <tr><td>Четверг</td><td>10:00 - 16:45</td></tr>
+                        <tr><td>Пятница</td><td>10:00 - 17:00</td></tr>
+                        <tr><td>Суббота</td><td>Выходной</td></tr>
+                        <tr><td>Воскресенье</td><td>Выходной</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+        </div>
+    </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

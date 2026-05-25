@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+    <input type="radio" id="theme-light" name="site-theme" class="theme-radio theme-light-radio" checked aria-hidden="true">
+    <input type="radio" id="theme-dark" name="site-theme" class="theme-radio theme-dark-radio" aria-hidden="true">
+    <input type="radio" id="theme-cat" name="site-theme" class="theme-radio theme-cat-radio" aria-hidden="true">
+    <div class="page">
+    <header id="top">
+        <div class="container header-grid">
+            <h1 class="logo"><a href="index.html">Rauf's&nbsp;Website</a></h1>
+            <div class="header-actions">
+                <div class="theme-switcher" aria-label="Выбор темы">
+                    <label for="theme-light" class="theme-button" title="Светлая тема">☀️</label>
+                    <label for="theme-dark" class="theme-button" title="Тёмная тема">🌙</label>
+                    <label for="theme-cat" class="theme-button" title="Кошачья тема">🐾</label>
+                </div>
+                <label for="menu-toggle" class="burger" aria-label="Открыть меню" title="Меню"><span></span><span></span><span></span><span class="burger-text">Меню</span></label>
+            </div>
+            <nav class="main-nav" aria-label="Главное меню">
+                <a href="index.html">Главная</a>
+                <a href="about.html">Обо мне</a>
+                <a href="skills.html">Навыки</a>
+                <a href="interactive.html" class="active">JavaScript</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container content-page">
+        <section class="interactive-card">
+            <h2>Интерактивные элементы JavaScript</h2>
+            <p data-greeting>Приветствие загружается...</p>
+            <button type="button" data-ask-name>Изменить имя</button>
+        </section>
+
+        <section class="interactive-list">
+            <article class="interactive-card" data-converter>
+                <h3>Конвертер валют</h3>
+                <label>Сумма в рублях
+                    <input type="number" id="rub-amount" value="1000" min="1">
+                </label>
+                <label>Валюта
+                    <select id="currency">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="cny">CNY</option>
+                    </select>
+                </label>
+                <p class="result-box" data-currency-result></p>
+            </article>
+
+
+            <article class="interactive-card">
+                <h3>Статистика посещений</h3>
+                <p data-stats>Статистика загружается...</p>
+                <p>Данные сохраняются в <code>localStorage</code>.</p>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+        </div>
+    </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

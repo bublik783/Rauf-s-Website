@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навыки</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+    <input type="radio" id="theme-light" name="site-theme" class="theme-radio theme-light-radio" checked aria-hidden="true">
+    <input type="radio" id="theme-dark" name="site-theme" class="theme-radio theme-dark-radio" aria-hidden="true">
+    <input type="radio" id="theme-cat" name="site-theme" class="theme-radio theme-cat-radio" aria-hidden="true">
+    <div class="page">
+    <header id="top">
+        <div class="container header-grid">
+            <h1 class="logo"><a href="index.html">Rauf's&nbsp;Website</a></h1>
+            <div class="header-actions">
+                <div class="theme-switcher" aria-label="Выбор темы">
+                    <label for="theme-light" class="theme-button" title="Светлая тема">☀️</label>
+                    <label for="theme-dark" class="theme-button" title="Тёмная тема">🌙</label>
+                    <label for="theme-cat" class="theme-button" title="Кошачья тема">🐾</label>
+                </div>
+                <label for="menu-toggle" class="burger" aria-label="Открыть меню" title="Меню"><span></span><span></span><span></span><span class="burger-text">Меню</span></label>
+            </div>
+            <nav class="main-nav" aria-label="Главное меню">
+                <a href="index.html">Главная</a>
+                <a href="about.html">Обо мне</a>
+                <a href="skills.html" class="active">Навыки</a>
+                <a href="interactive.html">JavaScript</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container content-page">
+        <section>
+            <h2>Навыки</h2>
+            <p>На этой странице собраны мои основные учебные и технические навыки. Уровень указан условно, чтобы показать текущий прогресс.</p>
+            <div class="skill-cards">
+                <article class="skill-card">
+                    <h3>HTML</h3>
+                    <p><strong>Уровень:</strong> продвинутый</p>
+                    <p>Семантическая структура страниц, списки, формы, изображения и ссылки.</p>
+                </article>
+                <article class="skill-card">
+                    <h3>CSS</h3>
+                    <p><strong>Уровень:</strong> начинающий</p>
+                    <p>Стилизация страниц, базовая адаптивность, flex, grid и CSS-переменные.</p>
+                </article>
+                <article class="skill-card">
+                    <h3>JavaScript</h3>
+                    <p><strong>Уровень:</strong> начинающий</p>
+                    <p>Переменные, функции, массивы, объекты, условия и циклы.</p>
+                </article>
+                <article class="skill-card skill-card-wide">
+                    <h3>Python</h3>
+                    <p><strong>Уровень:</strong> средний</p>
+                    <p>Базовая логика программирования, работа с данными и написание простых скриптов.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="interactive-card" data-calculator>
+            <h3>Простой калькулятор</h3>
+            <div class="tool-grid">
+                <label>Первое число
+                    <input type="number" id="calc-first" value="10">
+                </label>
+                <label>Операция
+                    <select id="calc-operation">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                </label>
+                <label>Второе число
+                    <input type="number" id="calc-second" value="5">
+                </label>
+            </div>
+            <button type="button">Посчитать</button>
+            <p class="result-box" data-calc-result>Результат появится здесь.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+        </div>
+    </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

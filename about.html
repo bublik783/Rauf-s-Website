@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-hidden="true">
+    <input type="radio" id="theme-light" name="site-theme" class="theme-radio theme-light-radio" checked aria-hidden="true">
+    <input type="radio" id="theme-dark" name="site-theme" class="theme-radio theme-dark-radio" aria-hidden="true">
+    <input type="radio" id="theme-cat" name="site-theme" class="theme-radio theme-cat-radio" aria-hidden="true">
+    <div class="page">
+    <header id="top">
+        <div class="container header-grid">
+            <h1 class="logo"><a href="index.html">Rauf's&nbsp;Website</a></h1>
+            <div class="header-actions">
+                <div class="theme-switcher" aria-label="Выбор темы">
+                    <label for="theme-light" class="theme-button" title="Светлая тема">☀️</label>
+                    <label for="theme-dark" class="theme-button" title="Тёмная тема">🌙</label>
+                    <label for="theme-cat" class="theme-button" title="Кошачья тема">🐾</label>
+                </div>
+                <label for="menu-toggle" class="burger" aria-label="Открыть меню" title="Меню"><span></span><span></span><span></span><span class="burger-text">Меню</span></label>
+            </div>
+            <nav class="main-nav" aria-label="Главное меню">
+                <a href="index.html">Главная</a>
+                <a href="about.html" class="active">Обо мне</a>
+                <a href="skills.html">Навыки</a>
+                <a href="interactive.html">JavaScript</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container content-page">
+        <section>
+            <h2>Обо мне</h2>
+            <p>Я начинающий специалист в сфере информационных технологий. Мне нравится изучать, как устроены сайты, интерфейсы и веб-приложения.</p>
+            <p>В учебе я стараюсь уделять внимание не только теории, но и практике. Сейчас я развиваю навыки HTML, CSS и JavaScript. Мне интересно работать с формами, таблицами, адаптивной версткой и логикой пользовательского интерфейса.</p>
+            <p>Помимо этого также увлекаюсь спортом и компьютерными играми.</p>
+        </section>
+
+
+        <section class="info-box">
+            <h3>Цели на ближайшие годы</h3>
+            <ol class="goals-list">
+                <li>Углубить знания JavaScript и DOM.</li>
+                <li>Освоить основы React или другого современного фреймворка.</li>
+                <li>Собрать полноценное портфолио из учебных и личных проектов.</li>
+            </ol>
+        </section>
+
+        <section class="info-box">
+            <h3>Резюме</h3>
+            <p>Ниже находится ссылка на файл резюме</p>
+            <a class="button-link" href="files/resume.docx" download>Скачать резюме</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+        </div>
+    </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
