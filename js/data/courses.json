@@ -1,0 +1,32 @@
+[
+  {
+    "name": "HTML",
+    "type": "Верстка",
+    "hours": 32,
+    "level": "Начинающий"
+  },
+  {
+    "name": "CSS",
+    "type": "Стилизация",
+    "hours": 40,
+    "level": "Начинающий"
+  },
+  {
+    "name": "JavaScript",
+    "type": "Программирование",
+    "hours": 64,
+    "level": "Начинающий"
+  },
+  {
+    "name": "Python",
+    "type": "Программирование",
+    "hours": 72,
+    "level": "Средний"
+  },
+  {
+    "name": "GitHub Pages",
+    "type": "Публикация",
+    "hours": 12,
+    "level": "Начинающий"
+  }
+]

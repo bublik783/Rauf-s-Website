@@ -810,3 +810,510 @@ footer a:hover {
 .social-icons a:hover {
     transform: translateY(-0.2rem) scale(1.06);
 }
+
+
+/* Исправления формы обратной связи */
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.contact-form button:disabled:hover {
+    background: var(--main-color);
+    color: #ffffff;
+    transform: none;
+}
+
+.field-error {
+    min-height: 1.1rem;
+    font-size: 0.9rem;
+    color: #c0392b;
+}
+
+.contact-form input.is-invalid,
+.contact-form textarea.is-invalid {
+    border-color: #c0392b;
+    background: rgba(192, 57, 43, 0.08);
+}
+
+.contact-form input.is-valid,
+.contact-form textarea.is-valid {
+    border-color: #217a36;
+}
+
+.form-modal-list {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1rem;
+}
+
+.form-modal-list p {
+    margin: 0;
+}
+
+
+.required-star {
+    color: #d93025;
+    font-weight: 700;
+}
+
+
+.photo-preview[hidden] {
+    display: none;
+}
+
+
+.contact-form label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: fit-content;
+}
+
+.required-star {
+    color: #d93025;
+    font-weight: 700;
+    line-height: 1;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-result[hidden] {
+    display: none;
+}
+
+
+/* Карточки хобби на странице «Обо мне» */
+.hobbies-section {
+    margin-top: 2rem;
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+.hobby-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 18rem;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.hobby-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 18rem;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.hobby-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.75));
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hobby-overlay h3 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.hobby-overlay p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hobby-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.75);
+}
+
+.hobby-card:hover .hobby-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+    .hobbies-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Карточки навыков с логотипами */
+.skill-cards-with-icons .skill-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-cards-with-icons .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+}
+
+.skill-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.skill-cards-with-icons .skill-card:hover .skill-icon {
+    transform: scale(1.08);
+}
+
+.skill-info h3 {
+    margin-top: 0;
+}
+
+.skill-info p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+    .skill-cards-with-icons .skill-card {
+        align-items: flex-start;
+    }
+
+    .skill-icon {
+        width: 64px;
+        height: 64px;
+    }
+}
+
+
+/* Исправления мобильного меню и переключателя тем */
+.burger {
+    position: relative;
+}
+
+.burger span:not(.burger-text) {
+    transform-origin: center;
+}
+
+#menu-toggle:checked ~ .page .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#menu-toggle:checked ~ .page .burger span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked ~ .page .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+    .header-actions {
+        display: contents;
+    }
+
+    .theme-switcher {
+        order: 3;
+        display: none;
+        width: 100%;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1rem;
+        margin-top: 0.5rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    #menu-toggle:checked ~ .page .theme-switcher {
+        display: flex;
+    }
+
+    .main-nav {
+        order: 2;
+    }
+
+    .burger {
+        order: 1;
+        justify-self: end;
+    }
+}
+
+@media (min-width: 768px) {
+    #menu-toggle:checked ~ .page .burger span:nth-child(1),
+    #menu-toggle:checked ~ .page .burger span:nth-child(2),
+    #menu-toggle:checked ~ .page .burger span:nth-child(3) {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+
+/* Финальная правка мобильного меню */
+@media (max-width: 767px) {
+    .burger {
+        min-width: 5.6rem;
+        min-height: 2.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+    }
+
+    .burger span:not(.burger-text) {
+        width: 1.25rem;
+        height: 0.12rem;
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        margin: 0;
+        transform-origin: center;
+    }
+
+    .burger span:nth-child(1) {
+        transform: translateY(-0.38rem);
+    }
+
+    .burger span:nth-child(2) {
+        transform: translateY(0);
+    }
+
+    .burger span:nth-child(3) {
+        transform: translateY(0.38rem);
+    }
+
+    .burger .burger-text {
+        margin-left: 1.35rem;
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(1) {
+        transform: translateY(0) rotate(45deg);
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(3) {
+        transform: translateY(0) rotate(-45deg);
+    }
+
+    #menu-toggle:checked ~ .page .theme-switcher {
+        display: flex;
+        width: 100%;
+        max-width: none;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0 0;
+        padding: 0.9rem 1rem;
+        box-sizing: border-box;
+    }
+}
+
+
+/* Исправление мобильного бургер-меню и блока тем */
+@media (max-width: 767px) {
+    .header-grid {
+        align-items: center;
+    }
+
+    .header-actions {
+        display: contents;
+    }
+
+    .burger {
+        min-width: 5.6rem;
+        min-height: 2.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        position: relative;
+        justify-self: end;
+        order: 1;
+    }
+
+    .burger span:not(.burger-text) {
+        display: block;
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        width: 1.25rem;
+        height: 0.12rem;
+        margin: 0;
+        border-radius: 999px;
+        transform-origin: center;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .burger span:nth-child(1) {
+        transform: translateY(-0.38rem);
+    }
+
+    .burger span:nth-child(2) {
+        transform: translateY(0);
+    }
+
+    .burger span:nth-child(3) {
+        transform: translateY(0.38rem);
+    }
+
+    .burger .burger-text {
+        margin-left: 1.35rem;
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(1) {
+        transform: translateY(0) rotate(45deg);
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #menu-toggle:checked ~ .page .burger span:nth-child(3) {
+        transform: translateY(0) rotate(-45deg);
+    }
+
+    .main-nav {
+        order: 2;
+    }
+
+    .theme-switcher {
+        order: 3;
+        display: none;
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1rem 0 0;
+        padding: 0.9rem 1rem;
+        box-sizing: border-box;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.12);
+        grid-column: 1 / -1;
+        justify-self: stretch;
+    }
+
+    #menu-toggle:checked ~ .page .theme-switcher {
+        display: flex !important;
+    }
+
+    .theme-button {
+        flex: 0 0 auto;
+    }
+}
+
+
+.name-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+[data-name-modal] input {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+
+/* Лабораторная №4: фильтры карточек и таблица */
+.skill-filter {
+    margin: 1.25rem 0;
+}
+
+.skill-filter input,
+.table-controls input,
+.table-controls select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+.skill-tags span {
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--accent-color);
+    font-size: 0.85rem;
+}
+
+.table-controls {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table-summary {
+    background: rgba(37, 99, 235, 0.08);
+}
+
+@media (min-width: 768px) {
+    .table-controls {
+        grid-template-columns: 1fr 16rem;
+    }
+}
+
+.github-form {
+    margin: 1rem 0;
+}
+.github-form-row {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+.github-form-row input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+.github-form-row button {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .github-form-row {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+    }
+    .github-form-row button {
+        width: auto;
+    }
+}

@@ -44,10 +44,39 @@
         </section>
 
         <section class="interactive-list">
+            <article class="interactive-card">
+                <h3>Статистика посещений</h3>
+                <p data-stats>Статистика загружается...</p>
+                <p>Данные сохраняются в <code>localStorage</code>.</p>
+            </article>
+
+            <article class="interactive-card" data-calculator>
+                <h3>Простой калькулятор</h3>
+                <p>Калькулятор демонстрирует переменные, числа, арифметические операции, функцию и оператор <code>switch</code>.</p>
+                <div class="tool-grid">
+                    <label>Первое число
+                        <input type="text" inputmode="numeric" id="calc-first" value="10">
+                    </label>
+                    <label>Операция
+                        <select id="calc-operation">
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                            <option value="*">×</option>
+                            <option value="/">÷</option>
+                        </select>
+                    </label>
+                    <label>Второе число
+                        <input type="text" inputmode="numeric" id="calc-second" value="5">
+                    </label>
+                </div>
+                <button type="button">Посчитать</button>
+                <p class="result-box" data-calc-result>Результат появится здесь.</p>
+            </article>
+
             <article class="interactive-card" data-converter>
                 <h3>Конвертер валют</h3>
                 <label>Сумма в рублях
-                    <input type="number" id="rub-amount" value="1000" min="1">
+                    <input type="text" inputmode="numeric" id="rub-amount" value="1000">
                 </label>
                 <label>Валюта
                     <select id="currency">
@@ -58,23 +87,32 @@
                 </label>
                 <p class="result-box" data-currency-result></p>
             </article>
-
-
-            <article class="interactive-card">
-                <h3>Статистика посещений</h3>
-                <p data-stats>Статистика загружается...</p>
-                <p>Данные сохраняются в <code>localStorage</code>.</p>
-            </article>
-
         </section>
     </main>
 
+
+    <div class="modal" data-name-modal aria-hidden="true">
+        <div class="modal__overlay" data-close-name-modal></div>
+        <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="name-modal-title">
+            <button class="modal__close" type="button" data-close-name-modal aria-label="Закрыть">×</button>
+            <h3 id="name-modal-title">Изменить имя</h3>
+            <label for="visitor-name-input">Ваше имя</label>
+            <input type="text" id="visitor-name-input" placeholder="Введите имя">
+            <p class="field-error" data-name-error></p>
+            <div class="name-modal-actions">
+                <button type="button" data-save-name>Сохранить</button>
+                <button type="button" data-close-name-modal>Отмена</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
-            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+            <p>&copy; 2026 Rauf's&nbsp;Website. Учебный проект</p>
         </div>
     </footer>
     </div>
+        <script type="module" src="js/main.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

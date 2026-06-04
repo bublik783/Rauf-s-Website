@@ -40,59 +40,22 @@
         <section>
             <h2>Навыки</h2>
             <p>На этой странице собраны мои основные учебные и технические навыки. Уровень указан условно, чтобы показать текущий прогресс.</p>
-            <div class="skill-cards">
-                <article class="skill-card">
-                    <h3>HTML</h3>
-                    <p><strong>Уровень:</strong> продвинутый</p>
-                    <p>Семантическая структура страниц, списки, формы, изображения и ссылки.</p>
-                </article>
-                <article class="skill-card">
-                    <h3>CSS</h3>
-                    <p><strong>Уровень:</strong> начинающий</p>
-                    <p>Стилизация страниц, базовая адаптивность, flex, grid и CSS-переменные.</p>
-                </article>
-                <article class="skill-card">
-                    <h3>JavaScript</h3>
-                    <p><strong>Уровень:</strong> начинающий</p>
-                    <p>Переменные, функции, массивы, объекты, условия и циклы.</p>
-                </article>
-                <article class="skill-card skill-card-wide">
-                    <h3>Python</h3>
-                    <p><strong>Уровень:</strong> средний</p>
-                    <p>Базовая логика программирования, работа с данными и написание простых скриптов.</p>
-                </article>
+            <div class="skill-filter">
+                <label for="skill-search">Фильтр навыков</label>
+                <input type="search" id="skill-search" data-skill-search placeholder="Введите название, уровень или тег">
             </div>
+            <div class="skill-cards skill-cards-with-icons" data-skills-list></div>
         </section>
-
-        <section class="interactive-card" data-calculator>
-            <h3>Простой калькулятор</h3>
-            <div class="tool-grid">
-                <label>Первое число
-                    <input type="number" id="calc-first" value="10">
-                </label>
-                <label>Операция
-                    <select id="calc-operation">
-                        <option value="+">+</option>
-                        <option value="-">-</option>
-                        <option value="*">×</option>
-                        <option value="/">÷</option>
-                    </select>
-                </label>
-                <label>Второе число
-                    <input type="number" id="calc-second" value="5">
-                </label>
-            </div>
-            <button type="button">Посчитать</button>
-            <p class="result-box" data-calc-result>Результат появится здесь.</p>
-        </section>
+<div data-skills-table></div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Rauf's Website. Учебный проект</p>
+            <p>&copy; 2026 Rauf's&nbsp;Website. Учебный проект</p>
         </div>
     </footer>
     </div>
+        <script type="module" src="js/main.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
