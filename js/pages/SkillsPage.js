@@ -12,15 +12,12 @@ export class SkillsPage extends BasePage {
 
     init() {
         super.init();
-        this.renderSkills();
+        this.renderSkills('[data-skills-list]');
         this.initSkillFilter();
         new DataTable('[data-skills-table]').init();
     }
 
-    renderSkills(list = this.skills) {
-        const container = document.querySelector('[data-skills-list]');
-        if (!container) return;
-
+    renderSkills(container, list = this.skills) {
         renderList(container, list, (skill) => new SkillCard(skill).render());
     }
 
@@ -37,7 +34,7 @@ export class SkillsPage extends BasePage {
                     || skill.tags.some((tag) => tag.toLowerCase().includes(query));
             });
 
-            this.renderSkills(filtered);
+            this.renderSkills('[data-skills-list]', filtered);
         });
     }
 }

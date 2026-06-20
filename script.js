@@ -91,8 +91,14 @@
         if (!/^\d$/.test(event.key)) event.preventDefault();
     }
 
+    function clearContainer(container) {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+
     function renderList(container, items, renderItem) {
-        container.innerHTML = '';
+        clearContainer(container);
         items.forEach((item) => container.append(renderItem(item)));
     }
 
@@ -144,19 +150,52 @@
             this.skill = skill;
         }
 
-        render() {
+        createElement() {
             const article = document.createElement('article');
             article.className = `skill-card ${this.skill.title === 'Python' ? 'skill-card-wide' : ''}`;
-            article.innerHTML = `
-                <img class="skill-icon" src="${this.skill.image}" alt="${this.skill.title}">
-                <div class="skill-info">
-                    <h3>${this.skill.title}</h3>
-                    <p><strong>Уровень:</strong> ${this.skill.level}</p>
-                    <p>${this.skill.description}</p>
-                    <p class="skill-tags">${this.skill.tags.map((tag) => `<span>${tag}</span>`).join('')}</p>
-                </div>
-            `;
+
+            const image = document.createElement('img');
+            image.className = 'skill-icon';
+            image.src = this.skill.image;
+            image.alt = this.skill.title;
+
+            const info = document.createElement('div');
+            info.className = 'skill-info';
+
+            const title = document.createElement('h3');
+            title.textContent = this.skill.title;
+
+            const level = document.createElement('p');
+            const levelTitle = document.createElement('strong');
+            levelTitle.textContent = 'Уровень:';
+            level.append(levelTitle, ` ${this.skill.level}`);
+
+            const description = document.createElement('p');
+            description.textContent = this.skill.description;
+
+            const tags = document.createElement('p');
+            tags.className = 'skill-tags';
+
+            this.skill.tags.forEach((tag) => {
+                const tagElement = document.createElement('span');
+                tagElement.textContent = tag;
+                tags.append(tagElement);
+            });
+
+            info.append(title, level, description, tags);
+            article.append(image, info);
+
             return article;
+        }
+
+        render(container = null) {
+            const element = this.createElement();
+
+            if (container) {
+                container.append(element);
+            }
+
+            return element;
         }
     }
 
@@ -165,17 +204,37 @@
             this.hobby = hobby;
         }
 
-        render() {
+        createElement() {
             const article = document.createElement('article');
             article.className = 'hobby-card';
-            article.innerHTML = `
-                <img src="${this.hobby.image}" alt="${this.hobby.title}">
-                <div class="hobby-overlay">
-                    <h3>${this.hobby.title}</h3>
-                    <p>${this.hobby.description}</p>
-                </div>
-            `;
+
+            const image = document.createElement('img');
+            image.src = this.hobby.image;
+            image.alt = this.hobby.title;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'hobby-overlay';
+
+            const title = document.createElement('h3');
+            title.textContent = this.hobby.title;
+
+            const description = document.createElement('p');
+            description.textContent = this.hobby.description;
+
+            overlay.append(title, description);
+            article.append(image, overlay);
+
             return article;
+        }
+
+        render(container = null) {
+            const element = this.createElement();
+
+            if (container) {
+                container.append(element);
+            }
+
+            return element;
         }
     }
 
@@ -187,49 +246,134 @@
             this.sortField = 'updated_at';
         }
 
+        clear(container) {
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+        }
+
+        createTextElement(tag, text, className = '') {
+            const element = document.createElement(tag);
+            element.textContent = text;
+            if (className) element.className = className;
+            return element;
+        }
+
+        renderMessage(container, message) {
+            this.clear(container);
+
+            const row = document.createElement('tr');
+            const cell = document.createElement('td');
+
+            cell.colSpan = 5;
+            cell.textContent = message;
+
+            row.append(cell);
+            container.append(row);
+        }
+
         async init() {
             if (!this.root) return;
 
-            this.root.innerHTML = `
-                <section class="interactive-card">
-                    <h3>GitHub-репозитории</h3>
-                    <p>Введите ник пользователя GitHub, чтобы загрузить таблицу его открытых репозиториев через <code>fetch</code>.</p>
-                    <form class="github-form" data-github-form>
-                        <label for="github-login">Ник из GitHub</label>
-                        <div class="github-form-row">
-                            <input type="text" id="github-login" data-github-login placeholder="Например, bublik783">
-                            <button type="submit">Загрузить</button>
-                        </div>
-                        <p class="field-error" data-github-error></p>
-                    </form>
-                    <div class="table-controls">
-                        <input type="search" data-table-search placeholder="Поиск по названию, описанию или языку" disabled>
-                        <select data-table-sort disabled>
-                            <option value="updated_at">Сортировка по дате обновления</option>
-                            <option value="name">Сортировка по названию</option>
-                            <option value="language">Сортировка по языку</option>
-                            <option value="stargazers_count">Сортировка по звёздам</option>
-                        </select>
-                    </div>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Описание</th>
-                                    <th>Язык</th>
-                                    <th>Звёзды</th>
-                                    <th>Последнее обновление</th>
-                                </tr>
-                            </thead>
-                            <tbody data-table-body>
-                                <tr><td colspan="5">Введите ник GitHub и нажмите «Загрузить».</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            `;
+            this.render(this.root);
             this.bindEvents();
+        }
+
+        render(container = this.root) {
+            if (!container) return;
+
+            this.clear(container);
+
+            const section = document.createElement('section');
+            section.className = 'interactive-card';
+
+            const title = this.createTextElement('h3', 'GitHub-репозитории');
+
+            const description = document.createElement('p');
+            description.append(
+                'Введите ник пользователя GitHub, чтобы загрузить таблицу его открытых репозиториев через ',
+                this.createTextElement('code', 'fetch'),
+                '.'
+            );
+
+            const form = document.createElement('form');
+            form.className = 'github-form';
+            form.dataset.githubForm = '';
+
+            const label = document.createElement('label');
+            label.htmlFor = 'github-login';
+            label.textContent = 'Ник GitHub';
+
+            const row = document.createElement('div');
+            row.className = 'github-form-row';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = 'github-login';
+            input.dataset.githubLogin = '';
+            input.placeholder = 'Например, bublik783';
+
+            const button = document.createElement('button');
+            button.type = 'submit';
+            button.textContent = 'Загрузить';
+
+            const error = document.createElement('p');
+            error.className = 'field-error';
+            error.dataset.githubError = '';
+
+            row.append(input, button);
+            form.append(label, row, error);
+
+            const controls = document.createElement('div');
+            controls.className = 'table-controls';
+
+            const search = document.createElement('input');
+            search.type = 'search';
+            search.dataset.tableSearch = '';
+            search.placeholder = 'Поиск по названию, описанию или языку';
+            search.disabled = true;
+
+            const sort = document.createElement('select');
+            sort.dataset.tableSort = '';
+            sort.disabled = true;
+
+            [
+                ['updated_at', 'Сортировка по дате обновления'],
+                ['name', 'Сортировка по названию'],
+                ['language', 'Сортировка по языку'],
+                ['stargazers_count', 'Сортировка по звёздам']
+            ].forEach(([value, text]) => {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = text;
+                sort.append(option);
+            });
+
+            controls.append(search, sort);
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-wrapper';
+
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const headRow = document.createElement('tr');
+
+            ['Название', 'Описание', 'Язык', 'Звёзды', 'Последнее обновление'].forEach((text) => {
+                const th = document.createElement('th');
+                th.textContent = text;
+                headRow.append(th);
+            });
+
+            thead.append(headRow);
+
+            const tbody = document.createElement('tbody');
+            tbody.dataset.tableBody = '';
+            this.renderMessage(tbody, 'Введите ник GitHub и нажмите «Загрузить».');
+
+            table.append(thead, tbody);
+            wrapper.append(table);
+            section.append(title, description, form, controls, wrapper);
+            container.append(section);
         }
 
         bindEvents() {
@@ -251,12 +395,12 @@
 
             search.addEventListener('input', () => {
                 this.applyFilters();
-                this.render();
+                this.renderRows();
             });
 
             sort.addEventListener('change', (event) => {
                 this.sortField = event.target.value;
-                this.render();
+                this.renderRows();
             });
         }
 
@@ -268,7 +412,7 @@
             const encodedLogin = encodeURIComponent(normalizedLogin);
 
             this.showError('');
-            tbody.innerHTML = '<tr><td colspan="5">Загрузка репозиториев...</td></tr>';
+            this.renderMessage(tbody, 'Загрузка репозиториев...');
 
             try {
                 const response = await fetch(`https://api.github.com/users/${encodedLogin}/repos?per_page=100&sort=updated`, {
@@ -278,21 +422,20 @@
                     }
                 });
 
+                if (response.status === 404) {
+                    throw new Error('Пользователь GitHub не найден.');
+                }
+
+                if (response.status === 403) {
+                    throw new Error('Error 403. Доступ к запрошенному ресурсу запрещён.');
+                }
+
+                if (response.status === 429) {
+                    throw new Error('Error 429. Слишком много запросов. Попробуйте позже.');
+                }
+
                 if (!response.ok) {
-                    let message = 'GitHub API временно недоступен.';
-                    if (response.status === 404) {
-                throw new Error('Пользователь GitHub не найден.');
-            }
-
-            if (response.status === 403) {
-                throw new Error('Error 403. Доступ к запрошенному ресурсу запрещён.');
-            }
-
-            if (response.status === 429) {
-                throw new Error('Error 429. Слишком много запросов. Попробуйте позже.');
-            }
-
-            throw new Error('Произошла ошибка при загрузке данных GitHub.');
+                    throw new Error('Произошла ошибка при загрузке данных GitHub.');
                 }
 
                 this.repos = await response.json();
@@ -304,13 +447,13 @@
                 this.filteredRepos = [...this.repos];
                 search.disabled = false;
                 sort.disabled = false;
-                this.render();
+                this.renderRows();
             } catch (error) {
                 this.repos = [];
                 this.filteredRepos = [];
                 search.disabled = true;
                 sort.disabled = true;
-                tbody.innerHTML = `<tr><td colspan="5">${error.message}</td></tr>`;
+                this.renderMessage(tbody, error.message);
             }
         }
 
@@ -330,8 +473,49 @@
             return new Date(dateString).toLocaleDateString('ru-RU');
         }
 
-        render() {
-            const tbody = this.root.querySelector('[data-table-body]');
+        createRepoRow(repo) {
+            const row = document.createElement('tr');
+
+            const nameCell = document.createElement('td');
+            const link = document.createElement('a');
+            link.href = repo.html_url;
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.textContent = repo.name;
+            nameCell.append(link);
+
+            row.append(
+                nameCell,
+                this.createTextElement('td', repo.description || 'Без описания'),
+                this.createTextElement('td', repo.language || 'Не указан'),
+                this.createTextElement('td', String(repo.stargazers_count)),
+                this.createTextElement('td', this.formatDate(repo.updated_at))
+            );
+
+            return row;
+        }
+
+        createSummaryRow(totalStars, repoCount) {
+            const row = document.createElement('tr');
+            row.className = 'table-summary';
+
+            const titleCell = document.createElement('td');
+            titleCell.colSpan = 3;
+            titleCell.append(this.createTextElement('strong', 'Итого'));
+
+            const starsCell = document.createElement('td');
+            starsCell.append(this.createTextElement('strong', String(totalStars)));
+
+            const countCell = document.createElement('td');
+            countCell.append(this.createTextElement('strong', `${repoCount} реп.`));
+
+            row.append(titleCell, starsCell, countCell);
+
+            return row;
+        }
+
+        renderRows(container = this.root.querySelector('[data-table-body]')) {
+            if (!container) return;
 
             const sorted = [...this.filteredRepos].sort((a, b) => {
                 if (this.sortField === 'stargazers_count') return b.stargazers_count - a.stargazers_count;
@@ -339,27 +523,17 @@
                 return String(a[this.sortField] || '').localeCompare(String(b[this.sortField] || ''), 'ru');
             });
 
-            const totalStars = sorted.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+            this.clear(container);
 
-            tbody.innerHTML = sorted.map((repo) => `
-                <tr>
-                    <td><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></td>
-                    <td>${repo.description || 'Без описания'}</td>
-                    <td>${repo.language || 'Не указан'}</td>
-                    <td>${repo.stargazers_count}</td>
-                    <td>${this.formatDate(repo.updated_at)}</td>
-                </tr>
-            `).join('') || '<tr><td colspan="5">Репозитории не найдены.</td></tr>';
-
-            if (sorted.length) {
-                tbody.innerHTML += `
-                    <tr class="table-summary">
-                        <td colspan="3"><strong>Итого</strong></td>
-                        <td><strong>${totalStars}</strong></td>
-                        <td><strong>${sorted.length} реп.</strong></td>
-                    </tr>
-                `;
+            if (!sorted.length) {
+                this.renderMessage(container, 'Репозитории не найдены.');
+                return;
             }
+
+            sorted.forEach((repo) => container.append(this.createRepoRow(repo)));
+
+            const totalStars = sorted.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+            container.append(this.createSummaryRow(totalStars, sorted.length));
         }
 
         showError(message) {
@@ -746,23 +920,38 @@
                 submitButton.disabled = !isFormValid();
             };
 
+            const createResultLine = (label, value) => {
+                const paragraph = document.createElement('p');
+                const strong = document.createElement('strong');
+
+                strong.textContent = `${label}:`;
+                paragraph.append(strong, ` ${value}`);
+
+                return paragraph;
+            };
+
             const openResultModal = (parts, fileName) => {
                 if (!modal || !modalContent) return;
                 const [surname, name, patronymic = 'не указано'] = parts;
                 const messageText = message.value.trim() || 'не указано';
 
-                modalContent.innerHTML = `
-                    <div class="form-modal-list">
-                        <p><strong>Фамилия:</strong> ${surname}</p>
-                        <p><strong>Имя:</strong> ${name}</p>
-                        <p><strong>Отчество:</strong> ${patronymic}</p>
-                        <p><strong>Email:</strong> ${email.value.trim()}</p>
-                        <p><strong>Телефон:</strong> ${phone.value.trim()}</p>
-                        <p><strong>Желаемая дата связи:</strong> ${date.value}</p>
-                        <p><strong>Фотография:</strong> ${fileName}</p>
-                        <p><strong>Сообщение:</strong> ${messageText}</p>
-                    </div>
-                `;
+                clearContainer(modalContent);
+
+                const list = document.createElement('div');
+                list.className = 'form-modal-list';
+
+                list.append(
+                    createResultLine('Фамилия', surname),
+                    createResultLine('Имя', name),
+                    createResultLine('Отчество', patronymic),
+                    createResultLine('Email', email.value.trim()),
+                    createResultLine('Телефон', phone.value.trim()),
+                    createResultLine('Желаемая дата связи', date.value),
+                    createResultLine('Фотография', fileName),
+                    createResultLine('Сообщение', messageText)
+                );
+
+                modalContent.append(list);
                 modal.classList.add('is-open');
                 modal.setAttribute('aria-hidden', 'false');
             };

@@ -142,23 +142,40 @@ export class ContactsPage extends BasePage {
             submitButton.disabled = !isFormValid();
         };
 
+        const createResultLine = (label, value) => {
+            const paragraph = document.createElement('p');
+            const strong = document.createElement('strong');
+
+            strong.textContent = `${label}:`;
+            paragraph.append(strong, ` ${value}`);
+
+            return paragraph;
+        };
+
         const openResultModal = (parts, fileName) => {
             if (!modal || !modalContent) return;
             const [surname, name, patronymic = 'не указано'] = parts;
             const messageText = message.value.trim() || 'не указано';
 
-            modalContent.innerHTML = `
-                <div class="form-modal-list">
-                    <p><strong>Фамилия:</strong> ${surname}</p>
-                    <p><strong>Имя:</strong> ${name}</p>
-                    <p><strong>Отчество:</strong> ${patronymic}</p>
-                    <p><strong>Email:</strong> ${email.value.trim()}</p>
-                    <p><strong>Телефон:</strong> ${phone.value.trim()}</p>
-                    <p><strong>Желаемая дата связи:</strong> ${date.value}</p>
-                    <p><strong>Фотография:</strong> ${fileName}</p>
-                    <p><strong>Сообщение:</strong> ${messageText}</p>
-                </div>
-            `;
+            while (modalContent.firstChild) {
+                modalContent.removeChild(modalContent.firstChild);
+            }
+
+            const list = document.createElement('div');
+            list.className = 'form-modal-list';
+
+            list.append(
+                createResultLine('Фамилия', surname),
+                createResultLine('Имя', name),
+                createResultLine('Отчество', patronymic),
+                createResultLine('Email', email.value.trim()),
+                createResultLine('Телефон', phone.value.trim()),
+                createResultLine('Желаемая дата связи', date.value),
+                createResultLine('Фотография', fileName),
+                createResultLine('Сообщение', messageText)
+            );
+
+            modalContent.append(list);
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
         };

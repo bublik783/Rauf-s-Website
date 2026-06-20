@@ -10,13 +10,10 @@ export class AboutPage extends BasePage {
 
     init() {
         super.init();
-        this.renderHobbies();
+        this.renderHobbies('[data-hobbies]');
     }
 
-    renderHobbies() {
-        const container = document.querySelector('[data-hobbies]');
-        if (!container) return;
-
+    renderHobbies(container) {
         renderList(container, HOBBIES, (hobby) => new HobbyCard(hobby).render());
     }
 }
